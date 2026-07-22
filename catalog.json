@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "skills": [
+    {
+      "name": "bear-notes",
+      "path": "skills/bear-notes",
+      "platforms": [
+        "darwin"
+      ],
+      "requires": {
+        "applications": [
+          "Bear"
+        ],
+        "commands": [
+          "bearcli"
+        ]
+      }
+    }
+  ]
+}

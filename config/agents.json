@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "agents": [
+    {
+      "id": "claude",
+      "name": "Claude Code",
+      "configDir": ".claude",
+      "skillsDir": "skills"
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "configDir": ".cursor",
+      "skillsDir": "skills"
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "configDir": ".codex",
+      "skillsDir": "skills"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini CLI",
+      "configDir": ".gemini",
+      "skillsDir": "skills"
+    },
+    {
+      "id": "qwen",
+      "name": "Qwen Code",
+      "configDir": ".qwen",
+      "skillsDir": "skills"
+    },
+    {
+      "id": "opencode",
+      "name": "OpenCode",
+      "configDir": ".config/opencode",
+      "skillsDir": "skills"
+    },
+    {
+      "id": "openclaw",
+      "name": "OpenClaw",
+      "configDir": ".openclaw",
+      "skillsDir": "skills"
+    },
+    {
+      "id": "agents",
+      "name": "Shared Agents",
+      "configDir": ".agents",
+      "skillsDir": "skills"
+    },
+    {
+      "id": "hermes",
+      "name": "Hermes Agent",
+      "configDir": ".hermes",
+      "skillsDir": "skills"
+    },
+    {
+      "id": "qoder",
+      "name": "Qoder",
+      "configDir": ".qoder",
+      "skillsDir": "skills"
+    }
+  ]
+}
