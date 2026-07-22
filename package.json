@@ -1,28 +1,16 @@
 {
   "name": "siifish-skills",
-  "version": "0.1.0",
-  "description": "A personal, cross-agent library of reusable AI skills.",
+  "version": "0.2.0",
+  "description": "A personal collection of portable Agent Skills.",
   "private": true,
   "type": "module",
-  "bin": {
-    "siifish-skills": "./bin/siifish-skills.js"
-  },
-  "files": [
-    "bin/",
-    "config/",
-    "skills/",
-    "src/",
-    "catalog.json",
-    "LICENSE",
-    "README.md"
-  ],
   "scripts": {
     "test": "node --test",
     "validate": "node src/validate.js",
     "check": "npm run validate && npm test"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.20.0"
   },
   "license": "MIT",
   "repository": {
