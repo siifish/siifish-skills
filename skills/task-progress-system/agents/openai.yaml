@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task Progress System"
+  short_description: "创建并维护 plans/ 任务推进系统，支持长跑与自主推进"
+  default_prompt: "使用 $task-progress-system 初始化并推进我的 plans/ 任务系统。"

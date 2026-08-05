@@ -9,6 +9,7 @@
 | Skill | 用途 | 平台 | 依赖 |
 |---|---|---|---|
 | `bear-notes` | 搜索、阅读、创建和整理 Bear 笔记 | macOS | Bear、`bearcli` |
+| `task-progress-system` | 创建并维护 `plans/` 任务推进系统（含长跑 / 自主巡检、硬约束、Exit 决策门、批判性复核） | 任意 | 无（`health_check.py` 需 Python 3） |
 
 ## 安装
 
@@ -44,6 +45,20 @@ npx skills add siifish/siifish-skills \
 npx skills add siifish/siifish-skills --skill bear-notes -g --copy
 ```
 
+### 不依赖 npx / GitHub 的安装（推荐用于国内服务器）
+
+本仓库本质上只是「git 仓库 + Markdown + 一个本地校验器」，对托管平台和 `npx skills` 都**没有运行时依赖**。在 Node < 22 或 GitHub 访问不稳定的机器上，权威副本托管在 **Gitee**，安装就是把 skill 目录复制进目标项目的 `.cursor/skills/`：
+
+```bash
+# 权威副本（Gitee，国内连接更稳）
+git clone git@gitee.com:siifish/siifish-skills.git
+# 装进某个项目（.cursor/skills 建议在该项目里 gitignore 掉，源真相在本仓库）
+mkdir -p /path/to/project/.cursor/skills
+cp -R siifish-skills/skills/task-progress-system /path/to/project/.cursor/skills/
+```
+
+更新时 `git pull` 后重新执行上面的 `cp` 覆盖即可。GitHub 仅作可选镜像。
+
 ## 管理
 
 ```bash
@@ -74,14 +89,16 @@ npx skills remove bear-notes -g
 ## 本地开发
 
 ```bash
-git clone https://github.com/siifish/siifish-skills.git
+git clone git@gitee.com:siifish/siifish-skills.git   # 权威副本；GitHub 为可选镜像
 cd siifish-skills
-npm run check
+npm run check           # 需要 Node.js >= 22.20.0
 npx skills add . --list
 npx skills add . --skill bear-notes -g
 ```
 
-从本地目录安装时，`npx skills` 仍会把 skill 复制到规范安装目录，再让 Agent 使用该快照；它不会直接链接 Git 工作区。每次修改后需重新执行本地安装才能刷新测试快照。正式使用时应从 GitHub 安装，以便锁文件记录远程来源并支持更新。校验器会自动发现 `skills/*/SKILL.md`，检查目录命名、frontmatter、名称唯一性、`agents/openai.yaml`、本地引用、个人绝对路径和常见凭据模式。
+从本地目录安装时，`npx skills` 仍会把 skill 复制到规范安装目录，再让 Agent 使用该快照；它不会直接链接 Git 工作区。每次修改后需重新执行本地安装（或直接 `cp` 覆盖，见上文「不依赖 npx / GitHub 的安装」）才能刷新快照。正式使用时应从权威仓库（Gitee）安装，以便记录远程来源并支持更新。校验器会自动发现 `skills/*/SKILL.md`，检查目录命名、frontmatter、名称唯一性、`agents/openai.yaml`、本地引用、个人绝对路径和常见凭据模式。
+
+> 校验器 `src/validate.js` 需要 Node.js >= 22.20.0。在旧 Node 环境无法运行时，可用等价的轻量检查手动核对（frontmatter 单行、SKILL.md ≤ 500 行、所有 Markdown 链接可解析、`agents/openai.yaml` 各字段带引号且 `short_description` 25–64 字）。
 
 新增 skill 时使用扁平目录结构：
 
