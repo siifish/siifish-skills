@@ -47,17 +47,34 @@ npx skills add siifish/siifish-skills --skill bear-notes -g --copy
 
 ### 不依赖 npx / GitHub 的安装（推荐用于国内服务器）
 
-本仓库本质上只是「git 仓库 + Markdown + 一个本地校验器」，对托管平台和 `npx skills` 都**没有运行时依赖**。在 Node < 22 或 GitHub 访问不稳定的机器上，权威副本托管在 **Gitee**，安装就是把 skill 目录复制进目标项目的 `.cursor/skills/`：
+本仓库本质上只是「git 仓库 + Markdown + 一个本地校验器」，对托管平台和 `npx skills` 都**没有运行时依赖**。在 Node < 22 或 GitHub 访问不稳定的机器上，权威副本托管在 **Gitee**，先 clone 下来：
 
 ```bash
-# 权威副本（Gitee，国内连接更稳）
-git clone git@gitee.com:siifish/siifish-skills.git
-# 装进某个项目（.cursor/skills 建议在该项目里 gitignore 掉，源真相在本仓库）
-mkdir -p /path/to/project/.cursor/skills
-cp -R siifish-skills/skills/task-progress-system /path/to/project/.cursor/skills/
+git clone git@gitee.com:siifish/siifish-skills.git   # 权威副本，国内连接更稳
 ```
 
-更新时 `git pull` 后重新执行上面的 `cp` 覆盖即可。GitHub 仅作可选镜像。
+然后用下面**两种方式之一**装进目标项目。无论哪种，都建议在目标项目里 gitignore 掉 `.cursor/skills/<skill>`，让源真相留在本仓库。
+
+**方式 A · 复制快照**（跨机器、不依赖 clone 常驻）：
+
+```bash
+mkdir -p /path/to/project/.cursor/skills
+cp -R siifish-skills/skills/task-progress-system /path/to/project/.cursor/skills/
+# 更新：git pull 后重新执行上面的 cp 覆盖
+```
+
+**方式 B · 软链接（指针，推荐给已常驻权威 clone 的机器）**：把 `.cursor/skills/<skill>` 做成指向本 clone 的符号链接，零复制、`git pull` 后自动同步。
+
+```bash
+ln -s /abs/path/to/siifish-skills/skills/task-progress-system \
+      /path/to/project/.cursor/skills/task-progress-system
+# 更新：在 clone 里 git pull 即可，active skill 自动跟随
+```
+
+- 优点：单一本地真相、无重复副本、模板/脚本随库更新即时生效。
+- 注意：① 依赖该 clone 保持在原路径（移动/删除会断链）；② 需 Agent 的 skill 发现能跟随符号链接（Linux/Cursor 下通常可行）；③ 目标项目里 gitignore 该软链接时用**不带结尾斜杠**的规则（`/.cursor/skills/<skill>`），否则只匹配目录、不匹配软链接。若 Agent 不认软链，回退到方式 A 即可，完全可逆。
+
+GitHub 仅作可选镜像。
 
 ## 管理
 
