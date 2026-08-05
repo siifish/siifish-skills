@@ -19,8 +19,8 @@ Before editing, identify which mode the user needs:
 
 | User intent | Action |
 |---|---|
-| "创建一个任务推进系统 / plans 模板" | Create or adapt the full `plans/` scaffold |
-| "新建阶段 / phase" | Add a new `phaseN-topic/` shell and update root `plans/README.md` |
+| "创建一个任务推进系统 / plans 模板" | Choose flat vs phased layout (see below), then create or adapt the `plans/` scaffold |
+| "新建阶段 / phase" | Add a new `phaseN-topic/` shell and update root `plans/README.md` (phased mode) |
 | "新建任务" | Add `tasks/T#-topic.md` or `R#-topic.md`, then link it from `project_overview.md` |
 | "继续推进当前任务" | Read overview, handoff, changelog, active task; state inferred state; then execute or propose next action |
 | "巡检 / 定时推进 / cron 推进" | Run the autonomous-patrol loop (see Operating Constitution); advance without deciding Go/No-Go |
@@ -38,13 +38,34 @@ plans/templates/task-progress-system/  # legacy in-project layout
 
 `<skill-dir>` is wherever this SKILL.md lives (e.g. `.cursor/skills/task-progress-system/` when installed, or the cloned repo path). If none are present, recreate the same shape manually from this skill's structure.
 
+## Layout: flat vs phased (choose first)
+
+Pick the layout to match project size — do not default to phased for a small project:
+
+- **Flat mode (small / single-track projects)**: put `project_overview.md`, `handoff.md`, `changelog.md`, `reference.md`, `tasks/`, and `resources/` **directly under `plans/`** (plus a `plans/README.md` index). No `phaseN-*` directory. This is the right default for a handful of tasks in one or two rounds.
+- **Phased mode (large / multi-stage projects)**: use `plans/phaseN-<topic>/` self-contained units, a root `plans/README.md` phase index, and cross-phase `plans/docs/`. Introduce this only when task count / stage count grows enough that a single overview stops being one-screen.
+
+You can start flat and migrate to phased later by moving the current files into `plans/phase1-<topic>/` and adding a phase index — do not force phases up front. The bundled `health_check.py` supports both layouts.
+
 ## Creation Workflow
+
+**Flat mode:**
+
+1. Copy `templates/root/README.md` to `plans/README.md`, and the four core files + `tasks/` + `resources/` from `templates/phase-template` directly into `plans/`.
+2. Trim the README to a flat index (task table + doc map), not a phase table.
+3. Add at least one first task in `plans/tasks/` using the task anatomy below.
+
+**Phased mode:**
 
 1. Create `plans/README.md`, `plans/docs/`, `plans/archive/`, and one current phase directory (copy `templates/root/.` into `plans/`, and `templates/phase-template` into `plans/phase1-<topic>`).
 2. In the phase directory keep `project_overview.md`, `handoff.md`, `changelog.md`, `reference.md`, `tasks/`, and `resources/`.
 3. Add at least one first task document in `tasks/` using the task anatomy below.
+
+**Both modes:**
+
 4. Keep placeholders explicit: `{project}`, `{phase}`, `{metric}`, `{owner}`, `{next action}`.
-5. Ensure root `README.md` points to the current phase and the phase overview links back to docs and tasks.
+5. Ensure the root `README.md` points to the current work (phase or flat task index) and the overview links back to docs and tasks.
+6. Keep `resources/` organized with `reports/`, `ideas/`, and `scripts/` subfolders (and `references/` for external material) so reusable analysis has a home outside single task docs.
 
 Naming conventions:
 
@@ -127,11 +148,12 @@ python .cursor/skills/task-progress-system/scripts/health_check.py plans
 python <skill-dir>/scripts/health_check.py plans
 ```
 
-Then inspect issues with judgment. The script catches broken links, missing phase files, task files not linked from overview, obvious status conflicts, and changelog entries that are out of reverse-chronological order. It does not replace reading the documents.
+Then inspect issues with judgment. The script auto-detects **flat vs phased** layout and, for each unit, catches: missing required files, tasks not linked from the overview/README, **document drift** (overview `最后更新` older than the latest `changelog.md` date), broken links, status conflicts, and out-of-order changelog entries. Template files (`_*.md`) are skipped so placeholder links do not create noise. It does not replace reading the documents.
 
-Manual health checklist:
+Manual health checklist (check drift first — it is the most common rot):
 
-- Root `plans/README.md` names the current phase correctly.
+- **No document drift**: `project_overview.md` `最后更新` date is not older than the latest `changelog.md` entry, and the "current stage / next step" still matches recent events (cross-check `git log` when resuming after a gap). A stale L1 misleads every future reader.
+- Root `plans/README.md` names the current phase (phased) or lists the current tasks (flat) correctly.
 - Current `project_overview.md` has a fresh one-screen summary and a task board.
 - Every task board row links to a task doc, unless explicitly external or future work.
 - Every `tasks/*.md` file is linked from `project_overview.md` or `handoff.md`.
@@ -153,6 +175,7 @@ Manual health checklist:
 
 When judging whether progress is reasonable, be skeptical and evidence-first:
 
+- **Detect drift first**: is the L1 overview stale relative to reality? Compare its `最后更新` date and "current stage/next step" against the latest `changelog.md` entry and `git log`. Long-running projects (and ones resumed after a gap) most often fail here — the overview says "do X next" while work has already moved on. Fix drift before trusting anything downstream.
 - Check whether the current "next step" follows from completed Exit Criteria.
 - Look for skipped dependencies, stale assumptions, and status contradictions.
 - Compare claimed results against raw logs, reports, docs summaries, or execution records.

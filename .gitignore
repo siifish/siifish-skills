@@ -3,3 +3,5 @@ node_modules/
 coverage/
 npm-debug.log*
 *.tgz
+__pycache__/
+*.py[cod]
