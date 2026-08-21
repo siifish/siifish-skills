@@ -48,4 +48,22 @@
 
 ---
 
+## flomo-manager
+
+- **来源**: 自研（OpenClaw Friday 打包，2026-08-21）
+- **一句话**: 智能灵感记录助手——把零散思考转成结构化 flomo 笔记（自动匹配标签和风格、建立笔记关联），并支持"智能漫步"：按主题漫游复习笔记、边走边分析标签体系与关联、给出可确认执行的优化建议。
+- **安装**: 从本仓库 `skills/flomo-manager/` 复制到你的 Agent skills 目录；需 Node.js ≥ 18 + npx mcporter；flomo MCP token 在用户 flomo 设置中生成（MCP/Experimental，形如 `fmcp_...`），配置到 `config/mcporter.json`，详见目录内 README.md
+- **触发方式**: `/flomo`、`FM`、`发送到 flomo`、`/flomo walk`、`flomo 漫步`、`随机漫步`、`标签分析`、`更新标签缓存`
+- **适用场景**:
+  - 随口说的灵感 → 800-1200 字结构化笔记（检索相关旧笔记、参考既有风格、推荐标签、确认后发送）
+  - 定期"漫步"复习某个主题的笔记，顺带治理标签体系（合并重复标签、补缺失标签、建双链）
+  - 维护标签语义/统计/用户偏好缓存，越用越懂用户的写作风格
+- **特点**:
+  - 先展示后发送：关键词、成文、标签全部经用户确认才写入
+  - 写操作（memo_update / tag_rename）逐条或批量确认后执行
+  - 缓存边走边学：漫步中增量更新标签语义，结束时写漫步历史
+- **不适合**: 只想单向快速发一条笔记的场景（用 flomo Webhook 更简单）；没有 flomo MCP token 的环境
+- **依赖**: flomo 官方 MCP 服务（`https://flomoapp.com/mcp`）+ mcporter CLI
+
+
 > 待补充 Skill 按相同格式追加在下方，保持最新优先排最前。
