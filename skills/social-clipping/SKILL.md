@@ -8,7 +8,7 @@ platforms: [macos, linux, windows]
 metadata:
   hermes:
     tags: [Social, Clipping, Archive, Bear, Methodology]
-    related_skills: [social-media-extraction, bear-notes, blocked-page-recovery, ocr-and-documents]
+    related_skills: [bear-notes, blocked-page-recovery, ocr-and-documents]
 ---
 
 # Social Clipping Methodology
