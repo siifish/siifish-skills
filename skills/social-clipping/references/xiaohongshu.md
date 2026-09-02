@@ -123,8 +123,9 @@ cat img1.jpg | bearcli attachments add <note_id> --filename "img_01.jpg"
 
 ### Title
 
-- `YYYY-MM-DD 合适标题（小红书剪藏）`
+- `YYYY-MM-DD 合适的标题`
 - "合适标题" should summarize the content (e.g. "具身offer决赛圈三选一"), not just echo the original title.
+- Place tags directly below the title line. Required: `#Notes/剪藏/小红书` plus 1-3 topic tags.
 
 ### Tags
 

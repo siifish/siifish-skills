@@ -3,7 +3,9 @@
 Use this template for every clipped social post.
 
 ```markdown
-# YYYY-MM-DD 合适的标题（来源剪藏）
+# YYYY-MM-DD 合适的标题
+
+#Notes/剪藏/小红书 #项目/... #Research/...
 
 > 来源：<original_url>
 > 原帖/原文信息：<one-line summary>
@@ -42,13 +44,14 @@ Show top-level comments and author replies. State how many were loaded vs. total
 
 ## Title convention
 
-- Format: `YYYY-MM-DD 合适的标题（来源剪藏）`
+- Format: `YYYY-MM-DD 合适的标题`
 - The "合适的标题" should be a short, descriptive title chosen by the assistant based on the content, not necessarily the original title verbatim.
-- For 小红书, use `（小红书剪藏）`; for other platforms use a similar suffix.
+- Place tags directly below the title line, before the source block.
+- For 小红书, the tag `#Notes/剪藏/小红书` is required; other platforms use the appropriate `#Notes/剪藏/<平台>` tag.
 
 ## Tag convention
 
-Always place tags below the title line, before the first section.
+Always place tags directly below the title line.
 
 **Required tags**
 - `#Notes/剪藏/小红书` (or the appropriate platform sub-tag)
