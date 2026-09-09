@@ -48,7 +48,7 @@ Document the exact commands or code snippets here. Include:
 
 ### Tags
 
-Required: `#Notes/剪藏/<平台>`
+Required: `#Notes/剪藏/<平台>`、`#TODO/unread`（未读标记，读完由用户自己摘掉）
 
 Recommended: infer 1-3 topic tags from content.
 

@@ -125,11 +125,11 @@ cat img1.jpg | bearcli attachments add <note_id> --filename "img_01.jpg"
 
 - `YYYY-MM-DD 合适的标题`
 - "合适标题" should summarize the content (e.g. "具身offer决赛圈三选一"), not just echo the original title.
-- Place tags directly below the title line. Required: `#Notes/剪藏/小红书` plus 1-3 topic tags.
+- Place tags directly below the title line. Required: `#Notes/剪藏/小红书` + `#TODO/unread`，plus 1-3 topic tags.
 
 ### Tags
 
-Required: `#Notes/剪藏/小红书`
+Required: `#Notes/剪藏/小红书`、`#TODO/unread`（未读标记，读完由用户自己摘掉）
 
 Recommended (1-3, auto-inferred from content): topic tags from the user's existing tree (e.g. `#Research/研究领域/具身智能`, `#项目/实习招聘/...`). If no good match, ask the user or create a dated sub-tag under `#项目/实习招聘/`.
 

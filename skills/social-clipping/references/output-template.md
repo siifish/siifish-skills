@@ -5,7 +5,7 @@ Use this template for every clipped social post.
 ```markdown
 # YYYY-MM-DD 合适的标题
 
-#Notes/剪藏/小红书 #项目/... #Research/...
+#Notes/剪藏/小红书 #TODO/unread #项目/... #Research/...
 
 > 来源：<original_url>
 > 原帖/原文信息：<one-line summary>
@@ -55,6 +55,7 @@ Always place tags directly below the title line.
 
 **Required tags**
 - `#Notes/剪藏/小红书` (or the appropriate platform sub-tag)
+- `#TODO/unread`（未读标记，读完由用户自己摘掉）
 
 **Recommended additional tags** (1-3, inferred from content)
 - Topic tags from the user's existing tree (e.g. `#Research/研究领域/具身智能`, `#项目/实习招聘/...`).
