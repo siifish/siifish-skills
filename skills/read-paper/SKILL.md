@@ -108,4 +108,5 @@ metadata:
 - pymupdf 用 `uv run --with pymupdf`（系统 python 没装）；新版 API 是 `import pymupdf` 不是 `import fitz`。
 - 表格优先**文字重述**再附图——截图里的数字不可搜索，重述才够。
 - 论文没报告的信息（训练 GPU 小时、λ 等）如实写"未报告"，不要编。
-- 写笔记前先 `bearcli create` 拿到 id，再挂附件；附件引用名必须与实际文件名一致，否则 Bear 会移除附件。
+- 写笔记前先 `bearcli create` 拿到 id，再挂附件；附件引用名必须与实际文件名一字不差，否则 Bear 会移除附件。
+- ⚠️ `bearcli attachments add` 会**在笔记末尾自动追加一排裸 `![](文件名)` 引用**（无 width 注释），与正文里已写好的带宽度引用重复。挂完全部附件后必须 `cat` 检查笔记尾部，用 `edit --find` 把这排裸引用整块删掉（这些文件在正文仍有引用，删除不触发附件保护门）。

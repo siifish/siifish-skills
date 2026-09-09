@@ -49,4 +49,5 @@ cat figure2-architecture-mask.png | bearcli attachments add <note-id> --filename
 注意：
 - `attachments add` 从 stdin 读字节，文件名用 `--filename` 指定。
 - 先 `bearcli create` 拿 note-id 再挂；正文里的 `![]()` 引用在附件挂入后即生效。
+- ⚠️ 挂附件后 bearcli 会在笔记**末尾**自动追加裸引用 `![](文件名)`，与正文重复——挂完全部附件后 `cat` 检查尾部并 `edit --find` 删除该重复块（整块精确匹配，一次删掉）。
 - 若 edit/overwrite 触发附件保护门（stderr 列出将丢失的文件），先读拒绝信息，确认后加 `--force`。
