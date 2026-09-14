@@ -38,6 +38,11 @@ curl -s -A "$UA" "https://xhslink.cn/o/XXXX" -D - --max-time 20 | head -20
 - Keep the whole query string (`xsec_token` is required).
 - `curl -IL` returns 404 because HEAD is unsupported; use plain GET.
 
+> ⚠️ **2026-09 起纯 HTTP 管线已失效**：即使带完整浏览器头，item 页 GET 会被 302 到 `xhs_sec_server` 安全校验页；Firecrawl 等数据中心 IP 还会撞上登录墙；`xhs` pip 库内置的旧版 sign 算法已被服务端拒绝（code -1）。
+> **可用方案：Playwright headless**（`uv run --with playwright`，需 `playwright install chromium` 一次）。住宅 IP + 真实 Chromium 指纹可通过安全校验，无需登录即可拿到 `__INITIAL_STATE__`。
+> 注意 `__INITIAL_STATE__` 有循环引用，不能整体 `JSON.stringify`，要在页面内写递归函数只抽取需要的字段（title/desc/imageList/user/interactInfo）。评论区数据**已不在** `__INITIAL_STATE__` 里（2026-09 验证全部返回 0），剪藏时直接标注"评论区需到 App 查看"。
+> 批量场景复用同一个 browser context 逐条 `page.goto`，每篇间隔 1-2s 防风控。图片用 `page.request.get(img_url, headers={"Referer": "https://www.xiaohongshu.com/"})` 下载，`urlDefault` 返回的多为 webp。
+
 ### 2. Fetch the item page
 
 ```bash
