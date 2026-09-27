@@ -1,6 +1,6 @@
 ---
 name: media-transcript
-description: "给链接出逐字稿：B站/YouTube 优先直抓字幕（零成本零误差），无字幕时下载音频走 ASR（SiliconFlow/Groq/OpenAI/本地 whisper 任选），输出 markdown 并可落 Bear。触发词：转文字、逐字稿、字幕提取、视频转文字、音频转文字、小宇宙转写、B站字幕、transcribe、把链接转成文字、会议纪要音频。"
+description: "给链接出逐字稿：B站/YouTube 优先直抓字幕（零成本零误差），无字幕时下载音频走 ASR（SiliconFlow/Groq/OpenAI/本地 whisper 任选）；默认转写完直接发 .txt 文件，要求存笔记时才落 Bear。触发词：转文字、逐字稿、字幕提取、视频转文字、音频转文字、小宇宙转写、B站字幕、transcribe、把链接转成文字、会议纪要音频。"
 version: 1.0.0
 author: Hermes Agent
 license: MIT
@@ -32,7 +32,7 @@ metadata:
 3. 字幕优先      → B站走官方接口直抓（含 AI 字幕，需登录 cookie）；
                    YouTube 走 yt-dlp 字幕字段；无字幕才动 ASR
 4. 回退 ASR      → 下载音频转写（详见 references/asr-backends.md）
-5. 产出 markdown → 按 Output Contract 落 Bear（默认）
+5. 产出 TXT      → 默认直接把 .txt 文件发给用户（Output Contract）
 ```
 
 原则：==**字幕直抓永远优先于 ASR**——免费、零错误率==。只有拿不到字幕时才动 ASR。
@@ -70,17 +70,19 @@ python3 scripts/transcribe.py <url> [-o out.md] [--backend siliconflow|groq|open
 
 ## Output Contract
 
-### 目的地
-- 默认落 Bear（`/bear-notes`）。用户只要文件就给 `-o` 路径。
+### 目的地（默认行为）
+- ==默认：转写完成后直接把 `.txt` 文件发给用户（Feishu 用 `MEDIA:/绝对路径` 附件）==，不落 Bear
+- 用户明确说"存 Bear / 记笔记 / 存一下"时，才走 bearcli 落库
+- 文件位置：`-o /tmp/<bvid或slug>.txt`；正文保留脚本的元信息头（标题/来源/转写方式/时长）
 
-### 标题与标签
+### Bear 版标题与标签（仅在用户要求存笔记时）
 - 标题：`YYYY-MM-DD 🎙 <标题>`（音频/播客）或 `YYYY-MM-DD 📺 <标题>`（视频）
 - 正文第一行内嵌标签，==必须带 `#TODO/unread`==（未读标记，读完用户自己摘）：
   - `#Notes/逐字稿/bilibili #TODO/unread` / `#Notes/逐字稿/小宇宙 #TODO/unread` / `#Notes/逐字稿/youtube #TODO/unread`
 - 正文结构沿用脚本输出：标题 + 元信息引用块（来源/平台/转写方式/时长/日期）+ `---` + 逐字稿
 
 ### 收尾
-- 报告 Bear 笔记 id + 字数 + 转写方式（字幕直抓 or ASR 后端）
+- 报告转写方式（字幕直抓 or ASR 后端）+ 字数，附上文件
 - 正文明显异常时（乱码/大段空白/中英混杂失控）如实告知，不要硬交付
 - ==B站 AI 字幕直抓的文本没有标点（B站源数据即如此），逐字稿用于阅读时可选做一次 LLM 后处理：加标点、分段——一句提示词即可，记得保持原文零删改==
 
