@@ -36,7 +36,7 @@ BACKENDS = {
     "siliconflow": {
         "url": "https://api.siliconflow.cn/v1/audio/transcriptions",
         "env": "SILICONFLOW_API_KEY",
-        "model": "FunASR/sense-voice-small",
+        "model": "FunAudioLLM/SenseVoiceSmall",
     },
     "groq": {
         "url": "https://api.groq.com/openai/v1/audio/transcriptions",

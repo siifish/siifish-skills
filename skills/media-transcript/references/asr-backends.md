@@ -6,7 +6,7 @@ Kimi（Moonshot）和 GLM（智谱）**均不提供 ASR API**——Kimi 官方�
 
 | 后端 | 环境变量 | 默认模型 | 中文效果 | 价格量级 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| SiliconFlow | `SILICONFLOW_API_KEY` | `FunASR/sense-voice-small` | ⭐⭐⭐⭐⭐ | 极便宜，有免费额度 | 国内直连，**个人首选**；注册 platform.siliconflow.cn |
+| SiliconFlow | `SILICONFLOW_API_KEY` | `FunAudioLLM/SenseVoiceSmall` | ⭐⭐⭐⭐⭐ | 极便宜，有免费额度 | 国内直连，**个人首选**；注册 cloud.siliconflow.cn。另有 `Qwen/Qwen3-ASR-1.7B` 等新模型可换 |
 | Groq | `GROQ_API_KEY` | `whisper-large-v3-turbo` | ⭐⭐⭐⭐ | ~$0.04/小时 | 速度极快（LPU），需外网 |
 | OpenAI | `OPENAI_API_KEY` | `whisper-1` | ⭐⭐⭐⭐ | $0.006/分钟 | 老牌稳定，需外网 |
 
