@@ -117,3 +117,4 @@ metadata:
 - 写笔记前先 `bearcli create` 拿到 id，再挂附件；附件引用名必须与实际文件名一字不差，否则 Bear 会移除附件。
 - ⚠️ `bearcli attachments add` 会**在笔记末尾自动追加一排裸 `![](文件名)` 引用**（无 width 注释），与正文里已写好的带宽度引用重复。挂完全部附件后必须 `cat` 检查笔记尾部，用 `edit --find` 把这排裸引用整块删掉（这些文件在正文仍有引用，删除不触发附件保护门）。
 - ⚠️ `bearcli edit --find/--replace` 的 CLI 参数会转义解释 `\n \t \\`——LaTeX 里的 `\theta`、`\text` 会被吃掉 `\t`。**经 CLI 参数传含 LaTeX 的字符串时反斜杠必须双写**（`\\theta`），或用 subprocess 列表传参避免 shell 引号问题；批量 edit 是原子的，一条失败全部不写，报 not found 时先 cat 核对实际字符。
+- ⚠️ execute_code 里写正文模板**不要用 r-string（r"""）**：r-string 中写的 `<!-- {\"width\":620} -->` 会把反斜杠字面保留进笔记，Bear 宽度注释失效。用普通三引号字符串，内部引号无需转义。写完务必 cat 抽查一处 `![]()` 引用确认无字面反斜杠、注释以 `-->` 正确闭合（`%}`、`>}}` 都是写残的变体）。
