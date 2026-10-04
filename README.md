@@ -6,12 +6,17 @@
 
 ## Skills
 
+下表和 `skills/` 目录一一对应。触发方式、适用场景写在 [SKILLS_REGISTRY.md](SKILLS_REGISTRY.md)。`grill-me` 和 `grill-with-docs` 只记在那份登记里，来自上游仓库，不放在本仓库的 `skills/` 中。
+
 | Skill | 用途 | 平台 | 依赖 |
 |---|---|---|---|
-| `paper-audit` | 检查论文正文和回复信：AI 腔、防御性论述、主张宽过证据、贡献被写小、论证接不上、前后不一致 | 任意 | 无 |
-| `social-clipping` | 多平台社交分享链接剪藏方法论：提取、OCR、整理为结构化文章并保存到 Bear | macOS（需 OCR） | `bearcli`、macOS Vision/ocrmac |
 | `bear-notes` | 搜索、阅读、创建和整理 Bear 笔记 | macOS | Bear、`bearcli` |
-| `task-progress-system` | 创建并维护 `plans/` 任务推进系统（含长跑 / 自主巡检、硬约束、Exit 决策门、批判性复核） | 任意 | 无（`health_check.py` 需 Python 3） |
+| `flomo-manager` | 把零散想法写成结构化 flomo 笔记，并按主题漫步复习、整理标签 | 任意 | Node.js、mcporter、flomo MCP |
+| `media-transcript` | 从视频或播客链接提取逐字稿；有字幕直接抓，没有再走语音识别。默认给出文本，用户要求时才写入 Bear | macOS、Linux | Python 3.9+、ffmpeg、yt-dlp；存笔记时另需 `bearcli` |
+| `paper-audit` | 检查论文正文和回复信：AI 腔、防御性论述、主张宽过证据、贡献被写小、论证接不上、前后不一致 | 任意 | 无 |
+| `read-paper` | 读论文并写成结构化 Bear 阅读笔记，含正文和图表 | macOS、Linux、Windows | Bear、`bearcli`、pymupdf |
+| `social-clipping` | 把社交平台分享链接整理成结构化文章，含图片 OCR 和评论精选，保存到 Bear | macOS（需 OCR） | `bearcli`、macOS Vision/ocrmac |
+| `task-progress-system` | 创建并维护 `plans/` 任务推进系统（含长跑 / 自主巡检、硬约束、Exit 决策门、批判性复核） | 任意 | Python 3（仅 `health_check.py`） |
 
 ## 安装
 
