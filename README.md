@@ -8,6 +8,7 @@
 
 | Skill | 用途 | 平台 | 依赖 |
 |---|---|---|---|
+| `paper-audit` | 检查论文正文和回复信：AI 腔、防御性论述、主张宽过证据、贡献被写小、论证接不上、前后不一致 | 任意 | 无 |
 | `social-clipping` | 多平台社交分享链接剪藏方法论：提取、OCR、整理为结构化文章并保存到 Bear | macOS（需 OCR） | `bearcli`、macOS Vision/ocrmac |
 | `bear-notes` | 搜索、阅读、创建和整理 Bear 笔记 | macOS | Bear、`bearcli` |
 | `task-progress-system` | 创建并维护 `plans/` 任务推进系统（含长跑 / 自主巡检、硬约束、Exit 决策门、批判性复核） | 任意 | 无（`health_check.py` 需 Python 3） |

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Audit"
+  short_description: "投稿前检查论文的 AI 腔、防御性论述和过宽的主张"
+  default_prompt: "使用 $paper-audit 检查这段论文写法，先不要改文件。"
