@@ -1,0 +1,4 @@
+interface:
+  display_name: "Meeting Minutes"
+  short_description: "把讨论转写整理成一篇全量会议纪要，并标出没听清的原话"
+  default_prompt: "使用 $meeting-minutes 把这份转写整理成一篇会议纪要。"

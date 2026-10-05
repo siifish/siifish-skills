@@ -13,6 +13,7 @@
 | `bear-notes` | 搜索、阅读、创建和整理 Bear 笔记 | macOS | Bear、`bearcli` |
 | `flomo-manager` | 把零散想法写成结构化 flomo 笔记，并按主题漫步复习、整理标签 | 任意 | Node.js、mcporter、flomo MCP |
 | `media-transcript` | 从视频或播客链接提取逐字稿；有字幕直接抓，没有再走语音识别。默认给出文本，用户要求时才写入 Bear | macOS、Linux | Python 3.9+、ffmpeg、yt-dlp；存笔记时另需 `bearcli` |
+| `meeting-minutes` | 把会议、组会、面试、讲座、聊天的转写整理成全量 Markdown 纪要 | 任意 | 无 |
 | `paper-audit` | 检查论文正文和回复信：AI 腔、防御性论述、主张宽过证据、贡献被写小、论证接不上、前后不一致 | 任意 | 无 |
 | `read-paper` | 读论文并写成结构化 Bear 阅读笔记，含正文和图表 | macOS、Linux、Windows | Bear、`bearcli`、pymupdf |
 | `social-clipping` | 把社交平台分享链接整理成结构化文章，含图片 OCR 和评论精选，保存到 Bear | macOS（需 OCR） | `bearcli`、macOS Vision/ocrmac |
